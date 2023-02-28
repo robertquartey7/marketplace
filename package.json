@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@prisma/client": "^4.10.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "prisma": "^4.10.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "marketplace",
+  "description": "## Authentication:",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertquartey7/marketplace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertquartey7/marketplace/issues"
+  },
+  "homepage": "https://github.com/robertquartey7/marketplace#readme"
+}
