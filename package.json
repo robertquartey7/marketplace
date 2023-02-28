@@ -1,19 +1,24 @@
 {
   "dependencies": {
     "@prisma/client": "^4.10.1",
+    "argon2": "^0.30.3",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
     "prisma": "^4.10.1"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon main.js"
   },
   "name": "marketplace",
   "description": "## Authentication:",
   "version": "1.0.0",
   "main": "main.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robertquartey7/marketplace.git"
