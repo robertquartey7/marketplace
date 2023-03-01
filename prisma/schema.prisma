@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["darwin"]
 }
 
 datasource db {
@@ -18,14 +19,21 @@ model User {
   email       String
   password    String
   store       Store?
+  role        Role   @default(USER)
+}
+
+enum Role {
+  USER
+  OWNER
+  ADMIN
 }
 
 model Store {
-  id      String @unique @default(uuid())
-  item_id String @unique
-  user_id String @unique
-  user    User   @relation(fields: [user_id], references: [id])
-  items   Items? @relation(fields: [item_id], references: [id])
+  id      String  @unique @default(uuid())
+  item_id String? @unique
+  user_id String  @unique
+  user    User    @relation(fields: [user_id], references: [id])
+  items   Items?  @relation(fields: [item_id], references: [id])
 }
 
 model Cart {
@@ -35,12 +43,12 @@ model Cart {
 }
 
 model Items {
-  id       String  @unique @default(uuid())
-  name     String  @db.VarChar(255)
+  id       String @unique @default(uuid())
+  name     String @db.VarChar(255)
   price    Int
   imageUrl String
   category String
-  rating   Int
-  Store    Store[]
+  rating   Int?
   Cart     Cart?
+  Store    Store?
 }

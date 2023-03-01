@@ -16,6 +16,7 @@ export default function setupJWTStrategy(passport) {
             username: payload.username,
             email: payload.email,
             displayName: payload.displayName,
+            role: payload.role,
           });
         } catch (error) {
           return done(error, null);

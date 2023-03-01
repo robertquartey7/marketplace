@@ -1,15 +1,13 @@
 {
   "dependencies": {
-    "@prisma/client": "^4.10.1",
+    "@prisma/client": "^4.11.0",
     "argon2": "^0.30.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1"
-  },
-  "devDependencies": {
-    "prisma": "^4.11.0"
+    "passport-jwt": "^4.0.1",
+    "zod": "^3.20.6"
   },
   "scripts": {
     "start": "nodemon main.js"
@@ -29,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/robertquartey7/marketplace/issues"
   },
-  "homepage": "https://github.com/robertquartey7/marketplace#readme"
+  "homepage": "https://github.com/robertquartey7/marketplace#readme",
+  "devDependencies": {
+    "prisma": "^4.11.0"
+  }
 }
