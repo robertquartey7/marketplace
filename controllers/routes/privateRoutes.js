@@ -105,9 +105,4 @@ router.post(
 );
 // edit item from the store
 
-
-// getting a certain items from the store
-router.get('/store/items/:id',async (req,res)=>{
-
-})
 export default router;
