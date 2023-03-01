@@ -3,6 +3,7 @@ import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import {prisma} from '../db/index.js'
 import dotenv from 'dotenv'
+import passport from "passport";
 dotenv.config()
 
 
@@ -88,6 +89,7 @@ router.post("/login", async (req, res) => {
               displayName: foundUser.displayName,
               username: foundUser.username,
               email:foundUser.email,
+              role: foundUser.role
             },
             process.env.SECRET_KEY
           );
@@ -103,6 +105,7 @@ router.post("/login", async (req, res) => {
           });
         }
       } catch (error) {
+        console.log(error)
         res.status(500).json({
           success: false,
           message: "something went wrong",
@@ -115,11 +118,20 @@ router.post("/login", async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       success: false,
       message: "something went wrong",
     });
   }
 });
+
+router.get('/', passport.authenticate('jwt', {session:false}), (req, res)=>{
+
+  res.status(200).json({
+    success:true,
+    data:req.user
+  })
+})
 
 export default router;
