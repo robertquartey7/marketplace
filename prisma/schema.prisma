@@ -15,6 +15,7 @@ model User {
   id          String @unique @default(uuid())
   displayName String
   username    String
+  email       String
   password    String
   store       Store?
 }
@@ -43,6 +44,3 @@ model Items {
   Store    Store[]
   Cart     Cart?
 }
-
-
-

@@ -28,6 +28,7 @@ router.post("/signup", async (req, res) => {
         const hashPassword = await argon2.hash(req.body.password);
         const newUser = await prisma.user.create({
           data: {
+            displayName: req.body.displayName,
             username: req.body.username,
             password: hashPassword,
             email: req.body.email
@@ -84,6 +85,7 @@ router.post("/login", async (req, res) => {
           const token = jwt.sign(
             {
               id: foundUser.id,
+              displayName: foundUser.displayName,
               username: foundUser.username,
               email:foundUser.email,
             },
