@@ -109,29 +109,5 @@ router.post(
 export default router;
 =======
 
-export default function privateRouter() {
-  const router = express.Router();
 
-//GET | One Item 
-  router.get("/store/items:id", async (req, res) => {
-    const allItems = await prisma.items.findMany({
-      where: {
-        id: req.body.id,
-      },
-      include: {
-        name: req.body.name,
-        price: req.body.price,
-        imageUrl: req.body.imageUrl,
-        category: req.body.category,
-        rating: req.body.rating,
-        store: req.body.store,
-        cart: req.body.cart,
-      },
-    });
-    res.status(200).json({
-      success: true,
-      items: allItems,
-    });
-  });
-}
->>>>>>> c7e6bbf (get route added | first commit)
+
