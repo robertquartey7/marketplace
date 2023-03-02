@@ -48,6 +48,32 @@ router.get("/store", async function(req, res) {
 })
 
 //GET | One Item 
+router.get("/store/items/:id",
+async function (req, res) {
+    try {
+        const oneItem = await prisma.items.findUnique({
+            where: {
+                id: req.items.params.id
+            }
+        });
+        if (oneItem) {
+            res.status(200).json({
+                success: true,
+                message: "Item was found",
+            })
+        } else {
+            res.status(404).json({
+                success: false,
+                message: "Item doesn't exist",
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong",
+        });
+    }
+});
 
 export default router
 
