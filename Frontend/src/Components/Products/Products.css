@@ -1,0 +1,197 @@
+.products {
+  min-height: 100vh;
+}
+.products-nav {
+}
+a {
+  text-decoration: none;
+}
+.hoverable {
+  display: inline-block;
+  backface-visibility: hidden;
+  vertical-align: middle;
+  position: relative;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  transform: translateZ(0);
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.hoverable:before {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  content: "";
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  /* W3C */
+  transition-duration: 0.3s;
+  transition-property: transform, opacity;
+}
+
+.hoverable:hover,
+.hoverable:active,
+.hoverable:focus {
+  transform: translateY(-5px);
+}
+.hoverable:hover:before,
+.hoverable:active:before,
+.hoverable:focus:before {
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+@keyframes bounce-animation {
+  16.65% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+
+  33.3% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
+  }
+
+  49.95% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+
+  66.6% {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+  }
+
+  83.25% {
+    -webkit-transform: translateY(1px);
+    transform: translateY(1px);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.bounce {
+  animation-name: bounce-animation;
+  animation-duration: 2s;
+}
+
+/* productsresult */
+.productsresult {
+  margin-top: 2rem;
+  display: grid;
+
+  padding: 0 0.2rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: minmax(15rem, auto);
+  gap: 1rem;
+}
+/* product card */
+
+.products__card {
+  overflow: hidden;
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1rem;
+  grid-template-areas:
+    "header header"
+    "header header"
+    " content cart";
+  cursor: pointer;
+  transition: 0.5s color ease-in-out;
+}
+.products__card:hover {
+  opacity: 0.98;
+  transition: 0.5s color ease-in-out;
+}
+.products__1 {
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+.products__1 img {
+  height: 100%;
+}
+.products__2 {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 2rem;
+}
+.products__3 {
+  grid-area: cart;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.products__top img {
+  transition: all 0.5s ease-in-out;
+}
+.products__top img:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+}
+
+.cart__box {
+}
+.cart {
+  font-size: 2rem;
+  border-radius: 50%;
+  transition: all 0.5s ease-in-out;
+}
+.cart:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+}
+
+/*everything below here is just setting up the page, so dont worry about it */
+
+@media (max-width: 700px) {
+  .productsresult {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 330px) {
+  .productsresult {
+    grid-template-columns: 1fr;
+  }
+}
+.pro-nav {
+  background: none !important;
+  text-transform: uppercase;
+}
+.pro-nav li {
+  margin-left: 3em;
+  margin-right: 3em;
+}
+.pro-nav li a {
+  transition: 0.5s color ease-in-out;
+}
+
+.page-title {
+  opacity: 0.75 !important;
+}
