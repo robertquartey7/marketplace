@@ -1,12 +1,12 @@
 import React from "react";
 import Tilt from "react-tilt";
 
-function ProductCard() {
+function ProductCard({id, name, category, price, imageUrl}) {
   return (
     <div className="products__card bg-dark ">
       <Tilt className="Tilt  products__1" options={{ max: 25 }}>
         <img
-          src="./img/image.png "
+          src={`${import.meta.env.VITE_APP_URL}images/${imageUrl}`}
           alt=""
           className="img-fluid"
           height={"150px"}
@@ -19,13 +19,13 @@ function ProductCard() {
             color: "#3F497F",
           }}
         >
-          laptop
+          {category}
         </p>
-        <h5>iphone 7</h5>
-        <h6>$300</h6>
+        <h5>{name}</h5>
+        <h6>${price}</h6>
       </div>
       <div className="cart__box products__3">
-        <i class="bi bi-cart4 cart pointer"></i>
+        <i className="bi bi-cart4 cart pointer"></i>
       </div>
     </div>
   );

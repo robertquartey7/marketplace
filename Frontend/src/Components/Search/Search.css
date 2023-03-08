@@ -1,0 +1,9 @@
+.Search {
+  position: relative;
+}
+
+.search__results {
+  position: absolute;
+  z-index: 10;
+  
+}

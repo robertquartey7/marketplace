@@ -1,10 +1,21 @@
 import express from "express";
 import { prisma } from "../db/index.js";
 import passport from "passport";
-
+import multer from "multer";
+import path from "path";
+import fs from 'fs'
 const router = express.Router();
 
-const itemValidation = "";
+const storage = multer.diskStorage({
+  destination: (req, file, cd) => {
+    cd(null, './uploads/images/',);
+  },
+  filename: (req, file, cd) => {
+    cd(null, Date.now() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage: storage });
+
 const options = {
   session: false,
 };
@@ -20,11 +31,12 @@ router.post(
         },
       });
       if (getUserStore) {
+        console.log(getUserStore.id);
         try {
           const newItem = await prisma.items.create({
             data: {
               ...req.body,
-              Store: {
+              store: {
                 connect: {
                   id: getUserStore.id,
                 },
@@ -35,6 +47,7 @@ router.post(
           res.status(201).json({
             success: true,
             message: "Successfully created",
+            data: newItem,
           });
         } catch (error) {
           console.log(error);
@@ -106,7 +119,69 @@ router.post(
 );
 // edit item from the store
 
+//Users can edit an item from their store
+
+router.put(
+  "/store/item/:id",
+  passport.authenticate("jwt", options),
+  async (req, res) => {
+    try {
+      const itemId = req.params.id;
+      const updateItem = await prisma.items.update({
+        where: {
+          id: itemId,
+        },
+        data: {
+          ...req.body,
+        },
+      });
+      if (updateItem) {
+        res.status(200).json({
+          success: true,
+          message: "Successfully updated",
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+      });
+    }
+  }
+);
+
+router.delete(
+  "/store/item/:id",
+  passport.authenticate("jwt", options),
+  async (req, res) => {
+    try {
+      const itemId = req.params.id;
+      const updateItem = await prisma.items.delete({
+        where: {
+          id: itemId,
+        },
+      });
+      if (updateItem) {
+        res.status(200).json({
+          success: true,
+          message: "Successfully deleted",
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong",
+      });
+    }
+  }
+);
+
+// file upload with multer
+router.post("/upload", upload.single("image"), (req, res) => {
+
+  res.status(201).json({
+    success: true,
+    fileDestination: req.file.filename
+  });
+});
 export default router;
-
-
-

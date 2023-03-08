@@ -6,22 +6,22 @@ function Navbar() {
   return (
     <div>
       <nav
-        class="navbar navbar-expand-sm bg-dark navbar-dark"
+        className="navbar navbar-expand-sm bg-dark navbar-dark"
         data-bs-theme="dark"
       >
-        <div class="container-fluid">
-          <Link class="navbar-brand" to={"/"}>
+        <div className="container-fluid">
+          <Link className="navbar-brand" to={"/"}>
             <img
               src="/img/logo.png"
               alt="Logo"
               width="30"
               height="24"
-              class="d-inline-block align-text-top"
+              className="d-inline-block align-text-top"
             />
             <span>SkyCart</span>
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarText"
@@ -29,13 +29,13 @@ function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+          <div className="collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
                 <SLink
-                  class="nav-link active pointer"
+                  className="nav-link active pointer"
                   aria-current="page"
                   to="products"
                   activeClass="active"
@@ -47,13 +47,18 @@ function Navbar() {
                   Products
                 </SLink>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/about">
-                  About Us
+              <li className="nav-item">
+                <Link className="nav-link" to="/about" >
+                  About 
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/contact">
+              <li className="nav-item">
+                <Link className="nav-link" to="/store">
+                  Store
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/contact">
                   Contact
                 </Link>
               </li>

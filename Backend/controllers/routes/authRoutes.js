@@ -1,11 +1,10 @@
 import express from "express";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import {prisma} from '../db/index.js'
-import dotenv from 'dotenv'
+import { prisma } from "../db/index.js";
+import dotenv from "dotenv";
 import passport from "passport";
-dotenv.config()
-
+dotenv.config();
 
 const router = express.Router();
 
@@ -32,7 +31,7 @@ router.post("/signup", async (req, res) => {
             displayName: req.body.displayName,
             username: req.body.username,
             password: hashPassword,
-            email: req.body.email
+            email: req.body.email,
           },
         });
 
@@ -55,7 +54,7 @@ router.post("/signup", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       success: false,
       message: "Something went wrong",
@@ -66,9 +65,7 @@ router.post("/signup", async (req, res) => {
 // login routes
 
 router.post("/login", async (req, res) => {
-  
   try {
-  
     const foundUser = await prisma.user.findFirst({
       where: {
         username: req.body.username,
@@ -88,8 +85,8 @@ router.post("/login", async (req, res) => {
               id: foundUser.id,
               displayName: foundUser.displayName,
               username: foundUser.username,
-              email:foundUser.email,
-              role: foundUser.role
+              email: foundUser.email,
+              role: foundUser.role,
             },
             process.env.SECRET_KEY
           );
@@ -105,20 +102,20 @@ router.post("/login", async (req, res) => {
           });
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).json({
           success: false,
           message: "something went wrong",
         });
       }
-    }else{
+    } else {
       res.status(404).json({
         success: false,
         message: "User not found",
       });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       success: false,
       message: "something went wrong",
@@ -126,12 +123,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get('/', passport.authenticate('jwt', {session:false}), (req, res)=>{
-
-  res.status(200).json({
-    success:true,
-    data:req.user
-  })
-})
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.status(200).json({
+      success: true,
+      data: req.user,
+    });
+  }
+);
 
 export default router;

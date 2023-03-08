@@ -1,31 +1,101 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Products.css";
 import ProductsResult from "./ProductsResult";
+import { Link } from "react-scroll";
+import axios from "axios";
 function Products() {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_APP_URL}store/items`).then((res) => {
+      setData(res.data.data);
+    });
+  }, []);
+
+  const handleClick = async (e) => {
+
+    if(e.target.name === "all"){
+      axios.get(`${import.meta.env.VITE_APP_URL}store/items`).then((res) => {
+        setData(res.data.data);
+      });
+    }else{
+      axios
+      .get(
+        `${import.meta.env.VITE_APP_URL}store/items?category=${e.target.name}`
+      )
+      .then((res) => {
+        setData(res.data.data);
+        console.log(data);
+      });
+    }
+    
+   
+  };
+
   return (
     <div id="products" className="products bg-light text-black container-fluid">
       <div className="navigation">
-        <div class="container-fluid">
-          <nav class="navbar navbar-inverse pro-nav">
-            <div class="container-fluid d-flex justify-content-center border-bottom">
-              <ul class="bg-light text-black products-nav ">
-                <a id="len1" class="hoverable btn" href="#">
+        <div className="container-fluid">
+          <nav className="navbar navbar-inverse pro-nav">
+            <div className="container-fluid d-flex justify-content-center border-bottom">
+              <ul className="bg-light text-black products-nav ">
+                <Link
+                  id="len1"
+                  className="hoverable btn"
+                  name="all"
+                  onClick={handleClick}
+                  to='products'
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+                >
                   All
-                </a>
-                <a id="len2" class="hoverable btn" href="#">
+                </Link>
+                <Link
+                  id="len2"
+                  className="hoverable btn"
+                  to="products"
+                  onClick={handleClick}
+                  name="mobile"
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+                >
                   Mobile
-                </a>
-                <a id="len3" class="hoverable btn" href="#">
+                </Link>
+                <Link
+                  id="len3"
+                  className="hoverable btn"
+                  to="products"
+                  onClick={handleClick}
+                  name="laptop"
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+                >
                   Laptop
-                </a>
-                <a id="len4" class="hoverable btn" href="#">
+                </Link>
+                <Link
+                  id="len4"
+                  className="hoverable btn"
+                  to="products"
+                  onClick={handleClick}
+                  name="watches"
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+                >
                   Watches
-                </a>
+                </Link>
               </ul>
             </div>
           </nav>
           <div className="row">
-            <ProductsResult/>
+            <ProductsResult data={data} />
           </div>
         </div>
       </div>
