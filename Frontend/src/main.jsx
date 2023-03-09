@@ -12,6 +12,9 @@ import Signup from "./Pages/Signup/Signup";
 import { AuthProvider } from "./Utils/AuthContext";
 import ProtectedRoute from "./Utils/ProtectedRoutes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AboutPage from "./Pages/About/AboutPage";
+import Delete from "./Components/Delete/Delete";
+import 'react-toastify/dist/ReactToastify.css';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: <AboutPage />,
       },
       {
         path: "/contact",
@@ -34,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Store />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/delete",
+        element: (
+          <ProtectedRoute>
+            <Delete />
           </ProtectedRoute>
         ),
       },

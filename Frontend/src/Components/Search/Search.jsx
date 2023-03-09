@@ -24,7 +24,7 @@ function Search() {
 
   return (
     <div className="Search">
-      <form class="d-flex" role="search">
+      <form className="d-flex" role="search">
         <input
           className="form-control me-2"
           type="search"
@@ -46,7 +46,7 @@ function Search() {
         >
           <div className="search__results bg-light rounded w-100 text-black">
             {searchResult.map((element) => (
-              <SerachResults name={element.name} imageUrl={element.imageUrl} />
+              <SerachResults key={element.id} name={element.name} imageUrl={element.imageUrl} id={element.id} />
             ))}
           </div>
         </div>

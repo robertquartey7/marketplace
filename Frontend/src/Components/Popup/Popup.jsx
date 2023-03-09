@@ -6,13 +6,14 @@ import axios from "axios";
 
 const Popup = (props) => {
   const [show, setShow] = useState(false);
-  const [products, setProducts] = useState()
-  useEffect(()=>{
-    axios.get(`${import.meta.env.VITE_APP_URL}store/item/${props.id}`)
-    .then(res=>{
-      console.log(res.data)
-    })
-  })
+  const [products, setProducts] = useState();
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_APP_URL}store/item/${props.id}`)
+      .then((res) => {
+        setProducts(res.data.data);
+      });
+  });
 
   const closeHandler = (e) => {
     setShow(false);
@@ -37,7 +38,16 @@ const Popup = (props) => {
           &times;
         </span>
         <div className={popupStyles.content}>
-          <ProductCard />
+         {
+          products &&(
+            <ProductCard
+            name={products.name}
+            category={products.category}
+            price={products.price}
+            imageUrl={products.imageUrl}
+          />
+          )
+         }
         </div>
       </div>
     </div>
@@ -45,7 +55,7 @@ const Popup = (props) => {
 };
 
 Popup.propTypes = {
-  title: PropTypes.string.isRequired,
+  // title: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };

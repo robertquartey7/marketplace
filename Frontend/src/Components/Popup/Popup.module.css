@@ -26,6 +26,7 @@
   margin-top: 0;
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
+  z-index: 1000;
 }
 .popup .close {
   position: absolute;
@@ -35,19 +36,23 @@
   font-size: 30px;
   font-weight: bold;
   text-decoration: none;
+  z-index: 1000;
   color: #333;
 }
 .popup .close:hover {
   cursor: pointer;
   color: #000;
+  z-index: 1000;
 }
 .popup .content {
   max-height: 30%;
   overflow: auto;
+  z-index: 1000;
 }
 
 @media screen and (max-width: 700px) {
   .popup {
     width: 70%;
+    z-index: 1000;
   }
 }

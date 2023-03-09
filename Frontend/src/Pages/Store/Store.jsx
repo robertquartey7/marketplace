@@ -3,7 +3,20 @@ import React, { useState } from "react";
 import "./Store.css";
 import { UserAuth } from "../../Utils/AuthContext";
 import Cookies from "js-cookie";
+import {Link} from 'react-router-dom'
+import { ToastContainer, toast } from "react-toastify";
 function Store() {
+  const notify = () =>
+    toast.success("Item created", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   const options = {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -90,6 +103,7 @@ function Store() {
                       },
                       options
                     );
+                    notify();
                   }
                 } catch (error) {
                   console.log(error);
@@ -173,11 +187,26 @@ function Store() {
             />
           </div>
 
-          <button type="submit " className="btn btn-primary w-100">
+          <button type="submit " className="btn btn-primary w-100 mb-2">
             Submit
           </button>
+          <Link to="/delete " className="btn btn-primary w-100">
+            delete an item
+          </Link>
         </form>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

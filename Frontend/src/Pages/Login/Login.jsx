@@ -12,6 +12,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 function Login() {
   const nagivate = useNavigate();
   const location = useLocation();
+
     // const getUser = useQuery({
     //   queryKey: ["users"],
     //   queryFn: async () => {
@@ -53,6 +54,7 @@ function Login() {
     //       .then((res) => res.json);
     //   },
     // });
+
     await axios
       .post(`${import.meta.env.VITE_APP_URL}auth/login`, {
         ...user,
@@ -61,6 +63,7 @@ function Login() {
         Cookies.set("token", res.data.token);
 
         if (Cookies.get("token")) {
+        
           nagivate(`${location.state}`);
         }
       });
@@ -73,7 +76,7 @@ function Login() {
         width: "70%",
       }}
     >
-      <h1 className="text-center">Login</h1>
+      <h1 className="text-center" >Login</h1>
       <form className=" store__form" onSubmit={handleSubmit}>
         <div className="mb-2">
           <label htmlFor="username" className="form-label">
@@ -130,6 +133,7 @@ function Login() {
           Don't have account <a href="/signup">create an account</a>
         </span>
       </form>
+   
     </div>
   );
 }

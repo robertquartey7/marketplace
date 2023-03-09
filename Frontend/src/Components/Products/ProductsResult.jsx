@@ -5,7 +5,7 @@ import axios from "axios";
 function ProductsResult({ data }) {
   const [visibility, setVisibility] = useState(false);
   const [products, setProducts] = useState([]);
-  const [id, setId] = useState("");
+  // const [id, setId] = useState("");
 
   const popupCloseHandler = (e) => {
     setVisibility(e);
@@ -14,22 +14,22 @@ function ProductsResult({ data }) {
   return (
     <div>
       <div className="productsresult">
-        <Popup onClose={popupCloseHandler} show={visibility} id={id}></Popup>
+        <Popup onClose={popupCloseHandler} show={visibility}></Popup>
 
         {data &&
           data.map((element) => {
             return (
               <div
+                key={element.id}
                 onClick={(e) => {
                   setVisibility(!visibility);
+
                  
-                  console.log(e.target);
                 }}
-                id={element.id}
                 className="pointer"
               >
                 <ProductCard
-                  key={element.id}
+                  
                   name={element.name}
                   imageUrl={element.imageUrl}
                   price={element.price}

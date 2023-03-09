@@ -1,9 +1,46 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import React from "react";
+import { Bounce } from "react-reveal";
 import Tilt from "react-tilt";
+import { toast, ToastContainer } from "react-toastify";
 
-function ProductCard({id, name, category, price, imageUrl}) {
+function ProductCard({
+  id,
+  name,
+  category,
+  price,
+  imageUrl,
+  delet,
+  setChange,
+}) {
+  const notify = () =>
+    toast.success("Item deleted", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+
+  const handleDelete = async (e) => {
+    axios
+      .delete(`${import.meta.env.VITE_APP_URL}store/item/${id}`, {
+        headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+      })
+      .then((res) => {
+        notify();
+        setChange(true);
+      });
+  };
+
   return (
-    <div className="products__card bg-dark ">
+<>
+<Bounce left>
+<div className="products__card bg-dark ">
       <Tilt className="Tilt  products__1" options={{ max: 25 }}>
         <img
           src={`${import.meta.env.VITE_APP_URL}images/${imageUrl}`}
@@ -25,9 +62,26 @@ function ProductCard({id, name, category, price, imageUrl}) {
         <h6>${price}</h6>
       </div>
       <div className="cart__box products__3">
-        <i className="bi bi-cart4 cart pointer"></i>
+        {/* <i className="bi bi-cart4 cart pointer"></i> */}
+        {delet && (
+          <i class="bi bi-trash-fill cart pointer" onClick={handleDelete}></i>
+        )}
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
+</Bounce>
+</>
   );
 }
 
