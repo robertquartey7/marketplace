@@ -19,3 +19,4 @@ Back-end:
 
 * NodeJS
 * Express
+* Vite
